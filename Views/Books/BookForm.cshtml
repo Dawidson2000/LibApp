@@ -9,13 +9,16 @@
 
 @using (Html.BeginForm("Save", "Books"))
 {
-    <div class="form-group">
-        @Html.LabelFor(m => m.Book.Name)
-        @Html.TextBoxFor(m => m.Book.Name, new { @class = "form-control" })
-    </div>
+<div class="form-group">
+    @Html.LabelFor(m => m.Book.Name)
+    @Html.TextBoxFor(m => m.Book.Name, new { @class = "form-control" })
+    @Html.ValidationMessageFor(m => m.Book.Name)
+    @Html.ValidationMessageFor(m => m.Book.Name)
+</div>
     <div class="form-group">
         @Html.LabelFor(m => m.Book.AuthorName)
         @Html.TextBoxFor(m => m.Book.AuthorName, new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.Book.AuthorName)
     </div>
     <div class="form-group">
         @Html.LabelFor(m => m.Book.GenreId)
@@ -27,10 +30,12 @@
     <div class="form-group">
         @Html.LabelFor(m => m.Book.ReleaseDate)
         @Html.TextBoxFor(m => m.Book.ReleaseDate, new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.Book.ReleaseDate)
     </div>
     <div class="form-group">
         @Html.LabelFor(m => m.Book.NumberInStock)
         @Html.TextBoxFor(m => m.Book.NumberInStock, new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.Book.NumberInStock)
     </div>
 
     @Html.HiddenFor(m => m.Book.Id)
