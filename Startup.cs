@@ -78,7 +78,6 @@ namespace LibApp
 
         private async Task CreateRoles(IServiceProvider serviceProvider)
         {
-            //initializing custom roles 
             var RoleManager = serviceProvider.GetRequiredService<RoleManager<IdentityRole>>();
             string[] roleNames = { "User", "StoreManager", "Owner" };
             IdentityResult roleResult;
@@ -87,8 +86,7 @@ namespace LibApp
             {
                 var roleExist = await RoleManager.RoleExistsAsync(roleName);
                 if (!roleExist)
-                {
-                    //create the roles and seed them to the database: Question 1
+                {       
                     roleResult = await RoleManager.CreateAsync(new IdentityRole(roleName));
                 }
             }

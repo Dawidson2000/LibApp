@@ -10,7 +10,7 @@
     {
 <li>Birthdate: @Model.Birthdate.Value.ToShortDateString()</li>}
 </ul>
-@if (!User.IsInRole("Administrator"))
+@if (!User.IsInRole("User"))
 {
     <text><a href='/customers/edit/@Model.Id'>Edit</a></text>
 }
