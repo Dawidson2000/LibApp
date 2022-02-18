@@ -9,12 +9,12 @@
 
 @using (Html.BeginForm("Save", "Books"))
 {
-    @Html.ValidationSummary()
+    @Html.ValidationSummary(true)
     @Html.AntiForgeryToken()
 <div class="form-group">
     @Html.LabelFor(m => m.Book.Name)
     @Html.TextBoxFor(m => m.Book.Name, new { @class = "form-control" })
-    @Html.ValidationMessage("XD")
+    @Html.ValidationMessageFor(m => m.Book.Name)
 </div>
     <div class="form-group">
         @Html.LabelFor(m => m.Book.AuthorName)
@@ -41,4 +41,9 @@
 
     @Html.HiddenFor(m => m.Book.Id)
     <button type="submit" class="btn btn-primary">Save</button>
+}
+
+@section scripts {
+    <script src="~/lib/jquery-validation/dist/jquery.validate.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js"></script>
 }

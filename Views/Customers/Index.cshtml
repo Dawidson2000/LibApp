@@ -3,6 +3,7 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+
 <h2>Customers</h2>
 
 <p>
@@ -35,7 +36,8 @@
                     {
                         data: "name",
                         render: function (data, type, customer) {
-                            return "<a href='customers/edit/" + customer.id + "'>" + customer.name + "</a>";
+                            //return "<a href='customers/edit/" + customer.id + "'>" + customer.name + "</a>";
+                            return "<a href='customers/Details/" + customer.id + "'>" + customer.name + "</a>";
                         }
                     },
                     {
@@ -44,7 +46,9 @@
                     {
                         data: "id",
                         render: function (data) {
-                            return "<button class='btn btn-secondary js-delete' data-customer-id=" + data + ">Delete</button>";
+                            const deleteBtn = "<button class='btn btn-secondary js-delete' data-customer-id=" + data + ">Delete</button>"; 
+                            return deleteBtn;
+             
                         }
                     }
                 ]
