@@ -1,9 +1,7 @@
 @model IEnumerable<LibApp.Models.Book>
 
-@{
-    ViewBag.Title = "Books";
-    Layout = "~/Views/Shared/_Layout.cshtml";
-}
+@{ ViewBag.Title = "Books";
+    Layout = "~/Views/Shared/_Layout.cshtml"; }
 
 <h2>Books</h2>
 
@@ -11,22 +9,55 @@
     <a class="btn btn-primary" asp-action="New">New Book</a>
 </p>
 
-<table class="table table-bordered table-hover">
+<table id="books"class="table table-bordered table-hover">
     <thead>
-    <tr>
-        <th>Book</th>
-        <th colspan="2">Genre</th>
-    </tr>
+        <tr>
+            <th>Book</th>
+            <th>Genre</th>
+            <th>Details</th>
+        </tr>
     </thead>
     <tbody>
-    @foreach (var book in Model)
-    {
-        <tr>
-            <td><a asp-action="Edit" asp-route-id="@book.Id">@Html.DisplayFor(modelItem => book.Name)</a></td>
-            <td>@Html.DisplayFor(modelItem => book.Genre.Name)</td>
-            <td><a asp-action="Details" asp-route-id="@book.Id">Details</a></td>
-
-        </tr>
-    }
     </tbody>
 </table>
+
+@*@foreach (var book in Model)
+    {
+    <tr>
+        <td><a asp-action="Edit" asp-route-id="@book.Id">@Html.DisplayFor(modelItem => book.Name)</a></td>
+        <td>@Html.DisplayFor(modelItem => book.Genre.Name)</td>
+        <td><a asp-action="Details" asp-route-id="@book.Id">Details</a></td>
+
+    </tr>}*@
+
+@section Scripts 
+{
+    <script>
+        $(document).ready(function () {
+            $("#books").DataTable({
+                ajax: {
+                    url: "api/books",
+                    dataSrc: ""
+                },
+                columns: [
+                    {
+                        data: "name",
+                        render: function (data, type, book) {
+                            return "<a href='books/edit/" + book.id + "'>" + book.name + "</a>";
+                            //return "<a href='customers/Details/" + customer.id + "'>" + customer.name + "</a>";
+                        }
+                    },
+                    {
+                        data: "name"
+                    },
+                    {
+                        data: "id",
+                        render: function (data, type, book) {
+                            return "<a href='books/Details/" + book.id + "'>Details</a>";                     
+                        }
+                    },
+                ]
+            });
+        });
+    </script>
+}

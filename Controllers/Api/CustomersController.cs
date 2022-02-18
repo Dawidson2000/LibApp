@@ -44,7 +44,7 @@ namespace LibApp.Controllers.Api
             }
 
             var customerDtos = customerQuery.Select(_mapper.Map<Customer, CustomerDto>);
-
+      
             return Ok(customerDtos);
         }
 
