@@ -96,9 +96,11 @@ namespace LibApp.Controllers
 
             return RedirectToAction("Index", "Books");
         }
-
-
-
-
+        [HttpGet]
+        [Route("api/books")]
+        public IList<Book> GetBooks()
+        {
+            return _bookRepository.GetBooks().ToList();
+        }
     }
 }
