@@ -53,10 +53,21 @@
                     {
                         data: "id",
                         render: function (data) {
-                            const deleteBtn = "<button class='btn btn-secondary js-delete' data-book-id=" + data + ">Delete</button>";
-                            return deleteBtn;
+                            @if(!User.IsInRole("User"))
+                            {  
+                                <text>
+                                    const deleteBtn = "<button class='btn btn-secondary js-delete' data-book-id=" + data + ">Delete</button>";
+                                    return deleteBtn;
+                                </text>
+                            }
+                            else
+                            {
+                                 <text>             
+                                    return null;
+                                </text>
+                            }
                         }
-                    },
+                    }
                 ]
             });
         });

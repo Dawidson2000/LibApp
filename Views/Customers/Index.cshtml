@@ -45,9 +45,20 @@
                     },
                     {
                         data: "id",
-                        render: function (data) {
-                            const deleteBtn = "<button class='btn btn-secondary js-delete' data-customer-id=" + data + ">Delete</button>";
-                            return deleteBtn;
+                        render: function (data) { 
+                           @if(!User.IsInRole("StoreManager"))
+                            {
+                                <text>
+                                    const deleteBtn = "<button class='btn btn-secondary js-delete' data-customer-id=" + data + ">Delete</button>";
+                                    return deleteBtn;
+                                </text>
+                            }
+                            else
+                            {
+                                 <text>
+                                    return null;
+                                </text>
+                            }
                         }
                     }
                 ]
