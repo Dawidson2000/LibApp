@@ -43,8 +43,8 @@
                     {
                         data: "name",
                         render: function (data, type, book) {
-                            return "<a href='books/edit/" + book.id + "'>" + book.name + "</a>";
-                            //return "<a href='customers/Details/" + customer.id + "'>" + customer.name + "</a>";
+                            //return "<a href='books/edit/" + book.id + "'>" + book.name + "</a>";
+                            return "<a href='books/Details/" + book.id + "'>" + book.name + "</a>";
                         }
                     },
                     {
@@ -52,11 +52,44 @@
                     },
                     {
                         data: "id",
-                        render: function (data, type, book) {
-                            return "<a href='books/Details/" + book.id + "'>Details</a>";                     
+                        render: function (data) {
+                            const deleteBtn = "<button class='btn btn-secondary js-delete' data-book-id=" + data + ">Delete</button>";
+                            return deleteBtn;
                         }
                     },
                 ]
+            });
+        });
+    </script>
+
+    <script>
+        $(document).ready(function () {
+            var table = $("#books").DataTable();
+            $("#books").on("click", ".js-delete", function () {
+                var button = $(this);
+                bootbox.confirm({
+                    title: "Delete book",
+                    message: "Confirm book deletion?",
+                    buttons: {
+                        cancel: {
+                            label: '<i class="fa fa-times"></i> Cancel'
+                        },
+                        confirm: {
+                            label: '<i class="fa fa-check"></i> Confirm'
+                        }
+                    },
+                    callback: function (result) {
+                        if (result) {
+                            $.ajax({
+                                url: "api/books/" + button.attr("data-book-id"),
+                                method: "DELETE",
+                                success: function () {
+                                    table.row(button.parents("tr")).remove().draw();
+                                }
+                            });
+                        }
+                    }
+                });
             });
         });
     </script>
