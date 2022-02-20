@@ -22,7 +22,7 @@ namespace LibApp.Controllers
             _bookRepository = bookRepository;
             _genreRepository = genreRepository;
         }
-        //[Authorize(Roles = "User, Owner, StoreManager")]
+        [Authorize(Roles = "Owner, User, StoreManager")]
         public IActionResult Index()
         {
             var books = _bookRepository.GetBooks()
@@ -30,7 +30,8 @@ namespace LibApp.Controllers
 
             return View(books);
         }
-  
+        
+        [Authorize(Roles = "Owner, User, StoreManager")]
         public IActionResult Details(int id)
         {
             var book = _bookRepository.GetBooks()
@@ -39,6 +40,7 @@ namespace LibApp.Controllers
             return View(book);
         }
 
+        [Authorize(Roles = "Owner, StoreManager")]
         public IActionResult Edit(int id)
         {
             var book = _bookRepository.GetBooks().SingleOrDefault(b => b.Id == id);
@@ -55,6 +57,8 @@ namespace LibApp.Controllers
 
             return View("BookForm", viewModel);
         }
+
+        [Authorize(Roles = "Owner, StoreManager")]
         public IActionResult New()
         {
             var viewModel = new BookFormViewModel
@@ -65,6 +69,7 @@ namespace LibApp.Controllers
             return View("BookForm", viewModel);
         }
 
+        [Authorize(Roles = "Owner, StoreManager")]
         [HttpPost]
         public IActionResult Save(Book book)
         {

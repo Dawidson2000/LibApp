@@ -39,7 +39,8 @@ namespace LibApp.Controllers.Api
         }
 
         //GET /api/books
-       [HttpGet]
+        [HttpGet]
+        [Authorize(Roles = "Owner, User, StoreManager")]
         public IActionResult GetBooks()
         {
             var books = _bookRepository.GetBooks()
@@ -51,6 +52,7 @@ namespace LibApp.Controllers.Api
 
         // GET /api/books/{id}
         [HttpGet("{id}", Name = "GetBook")]
+        [Authorize(Roles = "Owner, User, StoreManager")]
         public async Task<IActionResult> GetBook(int id)
         {
             Console.WriteLine("START");
@@ -69,6 +71,7 @@ namespace LibApp.Controllers.Api
 
         // POST /api/books
         [HttpPost]
+        [Authorize(Roles = "Owner, StoreManager")]
         public IActionResult CreateBook(BookDto bookrDto)
         {
             if (!ModelState.IsValid)
@@ -86,6 +89,7 @@ namespace LibApp.Controllers.Api
 
         // PUT /api/books/{id}
         [HttpPut("{id}")]
+        [Authorize(Roles = "Owner, StoreManager")]
         public void UpdateBook(int id, BookDto bookDto)
         {
             var bookInDb = _bookRepository.GetBooks().SingleOrDefault(b => b.Id == id);
@@ -100,6 +104,7 @@ namespace LibApp.Controllers.Api
 
         // DELETE /api/books/{id}
         [HttpDelete("{id}")]
+        [Authorize(Roles = "Owner, StoreManager")]
         public void DeleteBook(int id)
         {
             var bookInDb = _bookRepository.GetBooks().SingleOrDefault(b => b.Id == id);

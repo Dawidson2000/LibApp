@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using LibApp.Data;
 using LibApp.Dtos;
 using LibApp.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -22,6 +23,7 @@ namespace LibApp.Controllers.Api
 
         // POST /api/newRentals
         [HttpPost]
+        [Authorize(Roles = "Owner, User, StoreManager")]
         public IActionResult CreateNewRental(NewRentalDto newRental)
         {
             var customer = _context.Customers

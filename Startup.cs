@@ -90,7 +90,7 @@ namespace LibApp
                 {       
                     roleResult = await RoleManager.CreateAsync(new IdentityRole(roleName));
                 }
-            }
-        }
+            } 
+        }  
     }
 }
