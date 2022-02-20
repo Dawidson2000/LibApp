@@ -12,15 +12,12 @@ using LibApp.Interfaces;
 namespace LibApp.Controllers
 {
     public class BooksController : Controller
-    {
-        private readonly ApplicationDbContext _context;
-        
+    {      
         private readonly IBookRepository _bookRepository;
         private readonly IGenreRepository _genreRepository;
 
-        public BooksController(ApplicationDbContext context, IBookRepository bookRepository, IGenreRepository genreRepository)
+        public BooksController(IBookRepository bookRepository, IGenreRepository genreRepository)
         {
-            _context = context;
             _bookRepository = bookRepository;
             _genreRepository = genreRepository;
         }
